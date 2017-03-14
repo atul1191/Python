@@ -1,0 +1,54 @@
+import unittest
+from selenium import webdriver
+from selenium.webdriver.support.ui import Select
+from selenium.webdriver.common.keys import Keys
+
+class AweberTest(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        cls.driver = webdriver.Firefox()
+        cls.driver.maximize_window()
+        cls.driver.implicitly_wait(20)
+
+
+    def test_01login(self):
+        self.driver.get('http://newtours.demoaut.com/')
+        print(self.driver.title)
+        self.driver.find_element_by_name('userName').send_keys('atul')
+        self.driver.find_element_by_name('password').send_keys('atul')
+        self.assertEqual(self.driver.title,
+                         'Welcome: Mercury Tours')
+        self.driver.find_element_by_name('login').click()
+        #self.driver.get_screenshot_as_file('C://Users//675190//PycharmProjects//Practice\\Screenshot\\screen1.jpeg')
+        self.driver.save_screenshot('screen1.jpeg')
+
+    def test_02flight_Details(self):
+        dest = Select(self.driver.find_element_by_name('fromPort'))
+        dest.select_by_visible_text('London')
+        self.driver.find_element_by_name('findFlights').click()
+        #self.driver.get_screenshot_as_file('C://Users//675190//PycharmProjects//Practice//Screenshot//screen2.jpeg')
+        self.driver.save_screenshot('screen2.jpeg')
+        flight_radio = self.driver.find_element_by_xpath("//input[@value='Blue Skies Airlines$360$270$5:03']")
+        self.assertTrue(flight_radio.is_selected())
+        self.driver.find_element_by_name('reserveFlights').click()
+        #self.driver.get_screenshot_as_file('C://Users//675190//PycharmProjects//Practice//Screenshot//screen3.jpeg')
+        self.driver.save_screenshot('screen3.jpeg')
+
+    def test_03passenger_Details(self):
+        self.driver.find_element_by_name('passLast0').send_keys('pandey1')
+        self.driver.find_element_by_name('creditnumber').send_keys('1236547896321456')
+        self.driver.find_element_by_name('buyFlights').click()
+        self.assertEqual(self.driver.title,
+                         'Flight Confirmation: Mercury Tours')
+        #self.driver.get_screenshot_as_file('C://Users//675190//PycharmProjects//Practice//Screenshot//screen4.jpeg')
+        self.driver.save_screenshot('screen4.jpeg')
+
+
+
+
+
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.quit()
