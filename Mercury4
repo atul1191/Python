@@ -1,0 +1,11 @@
+from Mercury.LoginPage.Login import login
+from Mercury.LoginPage.FlightFinder import FlightFinder
+import unittest
+
+
+#login = unittest.TestLoader().loadTestsFromTestCase(login)
+flight = unittest.TestLoader().loadTestsFromTestCase(FlightFinder)
+
+test_suit = unittest.TestSuite([flight])
+
+unittest.TextTestRunner(verbosity=2).run(test_suit)
