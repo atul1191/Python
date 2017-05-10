@@ -1,0 +1,26 @@
+import unittest
+from selenium import webdriver
+from selenium.webdriver.support.ui import Select
+from Mercury.LoginPage.Login import login
+
+class FlightFinder(login):
+    driver = webdriver()
+
+    @classmethod
+    def setUpClass(cls):
+        super(FlightFinder, cls).setUpClass()
+
+    def test_02flight_Details(self):
+        dest = Select(self.driver.find_element_by_name('fromPort'))
+        dest.select_by_visible_text('London')
+        self.driver.find_element_by_name('findFlights').click()
+        #self.driver.save_screenshot('/screenshots/screen2.jpeg')
+        flight_radio = self.driver.find_element_by_xpath("//input[@value='Blue Skies Airlines$360$270$5:03']")
+        self.assertTrue(flight_radio.is_selected())
+        self.driver.find_element_by_name('reserveFlights').click()
+        #self.driver.save_screenshot('/screenshots/
+
+
+
+if __name__ == '__main__':
+    unittest.main()
