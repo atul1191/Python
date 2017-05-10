@@ -1,0 +1,14 @@
+import unittest
+from selenium import webdriver
+
+class Base(unittest.Testcase):
+
+    driver = webdriver()
+    @classmethod
+    def setUpClass(cls):
+        cls.driver = webdriver.Firefox()
+        cls.driver.implicitly_wait(20)
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.driver.close()
