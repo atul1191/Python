@@ -1,0 +1,25 @@
+from selenium import webdriver
+import unittest
+from Mercury.LoginPage.Base import Base
+
+class login(Base):
+
+    driver = webdriver()
+    @classmethod
+    def setUpClass(cls):
+
+        super(login, cls).setUpClass()
+
+    def test_01login(self):
+        self.driver.get('http://newtours.demoaut.com/')
+        print(self.driver.title)
+        self.driver.find_element_by_name('userName').send_keys('atul')
+        self.driver.find_element_by_name('password').send_keys('atul')
+        self.assertEqual(self.driver.title,
+                         'Welcome: Mercury Tours')
+        self.driver.find_element_by_name('login').click()
+        #self.driver.get_screenshot_as_file('C://Users//675190//PycharmProjects//Practice\\Screenshot\\screen1.jpeg')
+        self.driver.save_screenshot('/screenshots/screen1.jpeg')
+
+if __name__ == '__main__':
+    unittest.main()
