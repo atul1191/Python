@@ -1,0 +1,47 @@
+import xlrd
+import csv
+
+workbook = xlrd.open_workbook('C:/Users/Atul/Desktop/compare.xlsx')
+workbook = xlrd.open_workbook('C:/Users/Atul/Desktop/compare.xlsx', on_demand = True)
+#old data
+worksheet = workbook.sheet_by_index(0)
+first_row = [] # The row where we stock the name of the column
+for col in range(worksheet.ncols):
+    first_row.append( worksheet.cell_value(0,col) )
+# transform the workbook to a list of dictionaries
+data_old =[]
+for row in range(1, worksheet.nrows):
+    elm = {}
+    for col in range(worksheet.ncols):
+        elm[first_row[col]]=worksheet.cell_value(row,col)
+    data_old.append(elm)
+#print(data_old)
+
+#new data
+worksheet = workbook.sheet_by_index(1)
+first_row = [] # The row where we stock the name of the column
+for col in range(worksheet.ncols):
+    first_row.append( worksheet.cell_value(0,col) )
+# transform the workbook to a list of dictionaries
+data_new =[]
+for row in range(1, worksheet.nrows):
+    elm = {}
+    for col in range(worksheet.ncols):
+        elm[first_row[col]]=worksheet.cell_value(row,col)
+    data_new.append(elm)
+#print(data_new)
+
+#data comparision
+pairs = zip(data_old, data_new)
+compare =[[(k, x[k], y[k]) for k in x if x[k] != y[k]] for x, y in pairs if x != y]
+#print(compare)
+#for cmp in compare:
+    #print(cmp)
+
+#witer in excel    
+with open('C:/Users/Atul/Desktop/compare.csv', 'w') as f:
+    writer = csv.writer(f, delimiter =',')
+    writer.writerows(compare)
+
+
+#print(any(x != y for x,y in pairs))
