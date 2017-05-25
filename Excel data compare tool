@@ -5,10 +5,10 @@ workbook = xlrd.open_workbook('C:/Users/Atul/Desktop/compare.xlsx')
 workbook = xlrd.open_workbook('C:/Users/Atul/Desktop/compare.xlsx', on_demand = True)
 #old data
 worksheet = workbook.sheet_by_index(0)
-first_row = [] # The row where we stock the name of the column
+first_row = [] # The row where we store the name of the column
 for col in range(worksheet.ncols):
     first_row.append( worksheet.cell_value(0,col) )
-# transform the workbook to a list of dictionaries
+# conver the workbook to a list of dictionaries
 data_old =[]
 for row in range(1, worksheet.nrows):
     elm = {}
@@ -19,10 +19,10 @@ for row in range(1, worksheet.nrows):
 
 #new data
 worksheet = workbook.sheet_by_index(1)
-first_row = [] # The row where we stock the name of the column
+first_row = [] # The row where we store the name of the column
 for col in range(worksheet.ncols):
     first_row.append( worksheet.cell_value(0,col) )
-# transform the workbook to a list of dictionaries
+# convert the workbook to a list of dictionaries
 data_new =[]
 for row in range(1, worksheet.nrows):
     elm = {}
