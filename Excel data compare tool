@@ -46,6 +46,6 @@ with open('C:/Users/Atul/Desktop/compare.csv', 'w') as f:
 
 #print(any(x != y for x,y in pairs))
 
-#width = max(len(e) for t in gradebook for e in t[:-1]) + 1 
-#format=('%%-%ds' % width) * len(gradebook[0])
-#print('\n'.join(format % tuple(t) for t in gradebook))
+#width = max(len(e) for t in compare for e in t[:-1]) + 1 
+#format=('%%-%ds' % width) * len(compare[0])
+#print('\n'.join(format % tuple(t) for t in compare))
